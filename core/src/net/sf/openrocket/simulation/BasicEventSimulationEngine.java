@@ -352,6 +352,15 @@ public class BasicEventSimulationEngine implements SimulationEngine {
 			if (!currentStatus.getConfiguration().hasRecoveryDevice()) {
 				currentStatus.getWarnings().add(Warning.NO_RECOVERY_DEVICE);
 			}
+
+			// Add a warning if air pressure is unrealistically high or low
+			double altitude = currentStatus.getSimulationConditions().getLaunchSite().getAltitude();
+			double mbarLaunchPressure = currentStatus.getSimulationConditions().getAtmosphericModel().getConditions(altitude).getPressure() / 100;
+			if (mbarLaunchPressure < 300) {
+				currentStatus.getWarnings().add(Warning.LOW_AIR_PRESSURE);
+			} else if (mbarLaunchPressure > 1000) {
+				currentStatus.getWarnings().add(Warning.HIGH_AIR_PRESSURE);
+			}
 			
 			// Handle event
 			log.trace("Handling event " + event);			
