@@ -358,7 +358,7 @@ public class BasicEventSimulationEngine implements SimulationEngine {
 			double mbarLaunchPressure = currentStatus.getSimulationConditions().getAtmosphericModel().getConditions(altitude).getPressure() / 100;
 			if (mbarLaunchPressure < 300) {
 				currentStatus.getWarnings().add(Warning.LOW_AIR_PRESSURE);
-			} else if (mbarLaunchPressure > 1000) {
+			} else if (mbarLaunchPressure > 1100) {
 				currentStatus.getWarnings().add(Warning.HIGH_AIR_PRESSURE);
 			}
 			
